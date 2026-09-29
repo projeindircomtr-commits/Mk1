@@ -49,7 +49,7 @@ object VideoKaydedici {
     @Volatile private var appCtx: Context? = null
 
     private val thread = HandlerThread("video-kayit").apply { start() }
-    private val h = Handler(thread.looper)
+    private val handler = Handler(thread.looper)
 
     /** CaptureService hazir karelerden kayit. w/h ImageReader boyutu (cift sayi). */
     fun baslat(ctx: Context, w: Int, h: Int): Boolean {
@@ -57,7 +57,7 @@ object VideoKaydedici {
         val ww = (w and 1.inv()).coerceAtLeast(2)
         val hh = (h and 1.inv()).coerceAtLeast(2)
         val app = ctx.applicationContext
-        if (android.os.Looper.myLooper() == h.looper) {
+        if (android.os.Looper.myLooper() == handler.looper) {
             return try {
                 baslatIc(app, ww, hh)
                 true
@@ -68,7 +68,7 @@ object VideoKaydedici {
         }
         val latch = java.util.concurrent.CountDownLatch(1)
         var ok = false
-        h.post {
+        handler.post {
             ok = try {
                 baslatIc(app, ww, hh)
                 true
@@ -133,7 +133,7 @@ object VideoKaydedici {
         drainDevam = true
         kayitta = true
         busy = false
-        h.post(drainGorevi)
+        handler.post(drainGorevi)
     }
 
     /** API 29+: MediaStore uzerinden dogrudan Movies/Projeindirpedal klasorune (Galeri'de gorunur) */
@@ -171,13 +171,13 @@ object VideoKaydedici {
     fun kareYaz(img: Image) {
         if (!kayitta || busy) return
         val w = img.width
-        val h = img.height
-        if (w < 2 || h < 2) return
+        val height = img.height
+        if (w < 2 || height < 2) return
         val rgba = kopyaRgba(img) ?: return
         busy = true
         val ww = w
         val hh = h
-        h.post {
+        handler.post {
             try {
                 encodeRgba(rgba, ww, hh)
             } catch (_: Exception) {
@@ -339,7 +339,7 @@ object VideoKaydedici {
     fun durdur(ctx: Context) {
         if (!kayitta) return
         appCtx = ctx.applicationContext
-        h.post {
+        handler.post {
             try {
                 val enc = codec
                 if (enc != null) {
