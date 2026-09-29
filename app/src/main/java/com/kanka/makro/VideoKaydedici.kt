@@ -176,7 +176,7 @@ object VideoKaydedici {
         val rgba = kopyaRgba(img) ?: return
         busy = true
         val ww = w
-        val hh = h
+        val hh = height
         handler.post {
             try {
                 encodeRgba(rgba, ww, hh)
@@ -300,7 +300,7 @@ object VideoKaydedici {
                 bitir()
                 return
             }
-            if (drainDevam) h.postDelayed(this, 40)
+            if (drainDevam) handler.postDelayed(this, 40)
         }
     }
 
