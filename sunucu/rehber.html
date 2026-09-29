@@ -1,0 +1,283 @@
+<!doctype html>
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Projeindirpedal kurulum rehberi</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@600;800&family=Nunito+Sans:wght@400;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --lacivert:#1E2A3A; --derin:#141C27; --kart:#223246;
+  --altin:#E0B04A; --krem:#F3E9D2; --gri:#A9B4C2; --yesil:#39B26B; --kirmizi:#E06464;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+body{margin:0;background:var(--derin);color:var(--krem);
+  font:17px/1.6 "Nunito Sans",system-ui,sans-serif}
+a{color:var(--altin)}
+a:focus-visible,summary:focus-visible{outline:3px solid var(--altin);outline-offset:3px;border-radius:6px}
+.sayfa{max-width:680px;margin:0 auto;padding:28px 18px 60px}
+h1,h2,h3{font-family:"Roboto Slab",Georgia,serif;line-height:1.25;margin:0}
+h1{font-size:2rem;font-weight:800}
+h2{font-size:1.35rem;font-weight:800;margin:0 0 10px}
+h3{font-size:1.05rem;font-weight:600}
+p{margin:0 0 12px}
+b,strong{color:#fff}
+
+/* Baslik: P amblemi */
+.bas{display:flex;gap:18px;align-items:center;margin-bottom:22px}
+.amblem{flex:0 0 86px;height:86px;border-radius:50%;background:var(--lacivert);
+  box-shadow:inset 0 0 0 5px var(--derin),inset 0 0 0 10px var(--altin);
+  display:grid;place-items:center;font:800 46px/1 "Roboto Slab",serif;color:#fff}
+.bas small{display:block;color:var(--altin);font-weight:700;margin-top:4px}
+.ozet{background:var(--lacivert);border-left:4px solid var(--altin);padding:14px 16px;border-radius:0 12px 12px 0;margin-bottom:28px}
+.ozet ul{margin:6px 0 0;padding-left:20px}
+
+/* Adimlar: altin yol cizgisi */
+.yol{list-style:none;margin:0;padding:0;position:relative}
+.yol::before{content:"";position:absolute;left:21px;top:8px;bottom:8px;width:3px;background:linear-gradient(var(--altin),#6b5524)}
+.adim{position:relative;padding:0 0 30px 62px}
+.no{position:absolute;left:0;top:0;width:45px;height:45px;border-radius:50%;
+  background:var(--altin);color:var(--derin);display:grid;place-items:center;
+  font:800 1.25rem "Roboto Slab",serif;box-shadow:0 0 0 5px var(--derin)}
+.adim h2{padding-top:7px}
+ol.alt{margin:6px 0 12px;padding-left:22px}
+ol.alt li{margin-bottom:6px}
+
+/* Telefonda gorulecek yazilar */
+.ekran{display:inline;background:#fff;color:#1a1a1a;border-radius:6px;padding:1px 6px;font-weight:700;font-size:.93em;-webkit-box-decoration-break:clone;box-decoration-break:clone}
+.buton{display:inline;background:var(--yesil);color:#fff;border-radius:7px;padding:1px 7px;font-weight:700;font-size:.93em;-webkit-box-decoration-break:clone;box-decoration-break:clone}
+
+/* Marka bolumleri */
+details{background:var(--kart);border-radius:12px;margin:8px 0;overflow:hidden}
+summary{cursor:pointer;padding:12px 14px;font-weight:700;list-style:none;display:flex;justify-content:space-between;gap:10px}
+summary::-webkit-details-marker{display:none}
+summary::after{content:"＋";color:var(--altin)}
+details[open] summary::after{content:"－"}
+details .ic{padding:0 14px 12px}
+
+.not{border:1px dashed var(--gri);border-radius:12px;padding:10px 14px;color:var(--gri);font-size:.95rem;margin:10px 0}
+.uyari{background:#3a2226;border-left:4px solid var(--kirmizi);padding:12px 14px;border-radius:0 12px 12px 0;margin:10px 0}
+
+/* Tablet bolumu: ayri ve belirgin */
+.tablet{margin:10px 0 34px;padding:20px 18px;border-radius:18px;
+  background:var(--lacivert);box-shadow:inset 0 0 0 2px var(--altin)}
+.tablet h2{color:var(--altin)}
+
+/* Sorun cozme tablosu */
+.sorun{width:100%;border-collapse:collapse;font-size:.95rem}
+.sorun td{padding:10px 8px;border-top:1px solid #33455c;vertical-align:top}
+.sorun td:first-child{width:42%;color:#fff;font-weight:700}
+
+.panel{display:inline-flex;gap:14px;background:#262b31;border-radius:12px;padding:6px 14px;font-size:1.1rem;color:#fff}
+footer{margin-top:40px;text-align:center;color:var(--gri);font-size:.9rem}
+</style>
+</head>
+<body>
+<main class="sayfa">
+
+<header class="bas">
+  <div class="amblem" aria-hidden="true">P</div>
+  <div>
+    <h1>Projeindirpedal kurulumu</h1>
+    <small>MykoMobile için • Yapımcı: Muhammed Salman</small>
+  </div>
+</header>
+
+<section class="ozet">
+  <p><b>Toplam 5–10 dakika sürer ve sadece bir kere yapılır.</b> Başlamadan önce elinde şunlar olsun:</p>
+  <ul>
+    <li>Android 8 veya üstü telefon ya da tablet</li>
+    <li>Telefonda yüklü <b>MykoMobile</b></li>
+    <li>Muhammed'in verdiği <b>kullanıcı adı ve şifre</b></li>
+    <li>Muhammed'in gönderdiği <b>Projeindirpedal APK dosyası</b></li>
+    <li>İnternet bağlantısı</li>
+  </ul>
+  <p style="margin:10px 0 0">Bir üyelik <b>tek bir cihazda</b> çalışır. İlk giriş yaptığın cihaza bağlanır.</p>
+</section>
+
+<ol class="yol">
+
+<!-- 1 -->
+<li class="adim">
+  <span class="no">1</span>
+  <h2>APK dosyasını indir</h2>
+  <p>Sana WhatsApp'tan, Drive'dan ya da linkle gelen dosyayı indir. Dosyanın adı <b>.apk</b> ile biter.</p>
+  <p>Chrome <span class="ekran">Bu dosya türü cihazınıza zarar verebilir</span> derse <span class="ekran">Yine de indir</span>'e bas. Dosya internetten değil Muhammed'den geldiği için bu uyarı normal.</p>
+</li>
+
+<!-- 2 -->
+<li class="adim">
+  <span class="no">2</span>
+  <h2>Uygulamayı yükle</h2>
+  <ol class="alt">
+    <li>İnen dosyaya dokun (bildirimden ya da <b>Dosyalar → İndirilenler</b>'den).</li>
+    <li><span class="ekran">Güvenliğiniz için bu kaynaktan bilinmeyen uygulamaların yüklenmesine izin verilmiyor</span> uyarısı çıkarsa <span class="ekran">Ayarlar</span>'a bas, <b>Bu kaynaktan izin ver</b> anahtarını aç, geri tuşuyla dön.</li>
+    <li><span class="ekran">Yükle</span>'ye bas.</li>
+    <li><b>Play Protect</b> uyarısı çıkarsa: <span class="ekran">Daha fazla ayrıntı</span> → <span class="ekran">Yine de yükle</span>.</li>
+  </ol>
+  <details><summary>Xiaomi / Redmi / Poco</summary><div class="ic">
+    <p>Yükledikten sonra Xiaomi güvenlik taraması çıkabilir. <span class="ekran">Yükle</span> ya da <span class="ekran">Devam</span> de. "Hesabınla doğrula" isterse Mi hesabı şifreni gir ya da birkaç saniye bekleyip onayla.</p>
+  </div></details>
+  <details><summary>Samsung</summary><div class="ic">
+    <p>Yeni Samsung'larda <b>Otomatik Engelleyici</b> dışarıdan yüklemeyi tamamen engeller. Yükleme hiç başlamıyorsa: <b>Ayarlar → Güvenlik ve gizlilik → Otomatik Engelleyici</b> → kapat. Kurulum bitince tekrar açabilirsin.</p>
+  </div></details>
+  <p class="not">Güncelleme geldiğinde eskisini <b>silme</b>, yeni APK'yı direkt üstüne yükle. Girişin ve ayarların korunur.</p>
+</li>
+
+<!-- 3 -->
+<li class="adim">
+  <span class="no">3</span>
+  <h2>Giriş yap</h2>
+  <ol class="alt">
+    <li>Ana ekranda altın halkalı <b>P</b> simgesine dokun.</li>
+    <li>En üstteki <b>Üyelik</b> kartına kullanıcı adını ve şifreni yaz.</li>
+    <li><span class="buton">Giriş yap</span>'a bas.</li>
+  </ol>
+  <p>Kartta <b>✅ İsmin • X gün kaldı</b> yazıyorsa tamam.</p>
+</li>
+
+<!-- 4 -->
+<li class="adim">
+  <span class="no">4</span>
+  <h2>Erişilebilirlik iznini ver</h2>
+  <p>Bu izin, uygulamanın ekrana senin yerine dokunabilmesi için gerekiyor. Uygulamadaki <b>Kurulum</b> kartında <span class="buton">İzin ver</span>'e bas, açılan listede <b>Projeindirpedal</b>'ı bul.</p>
+  <details><summary>Xiaomi / Redmi / Poco</summary><div class="ic">
+    <p><b>Ayarlar → Ek ayarlar → Erişilebilirlik → İndirilen uygulamalar → Projeindirpedal</b> → anahtarı aç → <span class="ekran">İzin ver</span>.</p>
+  </div></details>
+  <details><summary>Samsung</summary><div class="ic">
+    <p><b>Ayarlar → Erişilebilirlik → Yüklü uygulamalar → Projeindirpedal</b> → anahtarı aç → <span class="ekran">İzin ver</span>.</p>
+  </div></details>
+  <details><summary>Diğer markalar (Oppo, Realme, Vivo, Pixel…)</summary><div class="ic">
+    <p><b>Ayarlar → Erişilebilirlik</b> içinde <b>İndirilen uygulamalar</b>, <b>Yüklü hizmetler</b> ya da <b>Yüklü uygulamalar</b> başlığını ara → Projeindirpedal → aç.</p>
+  </div></details>
+
+  <h3 style="margin-top:16px">Anahtar gri ve açılmıyorsa (çok normal)</h3>
+  <p>Android 13 ve üstü, dışarıdan yüklenen uygulamaların bu iznini kilitler. Açmak için:</p>
+  <ol class="alt">
+    <li>Gri <b>Projeindirpedal</b>'a bir kere dokun. <span class="ekran">Kısıtlı ayar</span> ya da <span class="ekran">Erişim reddedildi</span> uyarısını gör, <span class="ekran">Kapat</span>. Bu adımı atlama, yoksa sonraki seçenek çıkmaz.</li>
+    <li>Uygulamaya dön, Kurulum kartındaki <span class="buton">Kısıtlı ayar sayfasını aç</span>'a bas.</li>
+    <li>Sağ üstteki <b>⋮</b> (üç nokta) → <span class="ekran">Kısıtlı ayarlara izin ver</span> → ekran kilidini/parmak izini onayla.</li>
+    <li>Tekrar <span class="buton">İzin ver</span>'e bas, Projeindirpedal'ı aç.</li>
+  </ol>
+  <p>İzin verince ekranın köşesinde küçük bir panel çıkar: <span class="panel">⠿ ▶ ⋯</span></p>
+</li>
+
+<!-- 5 -->
+<li class="adim">
+  <span class="no">5</span>
+  <h2>Arka planda kapanmasın</h2>
+  <p>Telefonlar pil tasarrufu için uygulamaları kapatır. Kurulum kartında <span class="buton">Ayarla</span>'ya bas, çıkan pencerede <span class="ekran">İzin ver</span> de. Sonra markana göre:</p>
+  <details><summary>Xiaomi / Redmi / Poco</summary><div class="ic">
+    <ol class="alt">
+      <li><b>Ayarlar → Uygulamalar → Uygulamaları yönet → Projeindirpedal</b></li>
+      <li><b>Otomatik başlatma</b>: aç</li>
+      <li><b>Pil tasarrufu</b>: <span class="ekran">Kısıtlama yok</span></li>
+    </ol>
+  </div></details>
+  <details><summary>Samsung</summary><div class="ic">
+    <ol class="alt">
+      <li><b>Ayarlar → Uygulamalar → Projeindirpedal → Pil</b> → <span class="ekran">Kısıtlamasız</span></li>
+      <li><b>Ayarlar → Pil → Arka plan kullanım sınırları → Asla uyku moduna geçmeyen uygulamalar</b> → <b>+</b> → Projeindirpedal</li>
+    </ol>
+  </div></details>
+  <details><summary>Oppo / Realme / Vivo</summary><div class="ic">
+    <p><b>Ayarlar → Uygulamalar → Projeindirpedal → Pil kullanımı</b> → <b>Arka planda çalışmaya izin ver</b> ve <b>Otomatik başlat</b> açık olsun.</p>
+  </div></details>
+  <p>Kurulum kartındaki üç adımın hepsi <b>✅</b> olmalı.</p>
+</li>
+
+<!-- 6 -->
+<li class="adim">
+  <span class="no">6</span>
+  <h2>Başlat</h2>
+  <ol class="alt">
+    <li>MykoMobile açıksa önce tamamen kapat.</li>
+    <li>Projeindirpedal'da büyük yeşil <span class="buton">▶ OYUNU AÇ VE BAŞLAT</span> butonuna bas.</li>
+    <li>Ekran paylaşım penceresi çıkar. Acele etme:
+      <ol class="alt">
+        <li><span class="ekran">Tek bir uygulamayı paylaş</span> yazan kutuya dokun → <span class="ekran">Tüm ekranı paylaş</span>'ı seç.</li>
+        <li><span class="ekran">Ekranı paylaş</span> ya da <span class="ekran">Şimdi başlat</span>'a bas.</li>
+      </ol>
+    </li>
+    <li>Oyun kendiliğinden açılır. Karakterinle oyuna gir.</li>
+  </ol>
+  <p>Makro 4 saniye sonra başlar. Oyun daha yükleniyorsa paneldeki <b>⏸</b> ile durdur, karakter oyuna girince <b>▶</b>'a bas.</p>
+  <div class="uyari"><b>"Tek bir uygulama"yı seçme.</b> O zaman HP/MP, hedef ve kutu tanıma çalışmaz. Mutlaka <b>Tüm ekran</b>.</div>
+  <p class="not">Ekran izni telefon yeniden başlayana kadar geçerli. Gün içinde tekrar sormaz.</p>
+</li>
+
+<!-- 7 -->
+<li class="adim">
+  <span class="no">7</span>
+  <h2>Oyundaki panel</h2>
+  <p><span class="panel">⠿ ▶ ⋯ Hazır</span></p>
+  <ol class="alt" style="list-style:none;padding-left:0">
+    <li><b>⠿</b> basılı tutup sürükle. Paneli oyun tuşlarının <b>üstüne koyma</b>, boş bir köşeye al.</li>
+    <li><b>▶ / ⏸</b> başlat / durdur.</li>
+    <li><b>⋯</b> menü: tuş düzenleme, bar ve kutu kaydı (makro dururken açılır).</li>
+    <li>Sağdaki yazı: <b>⚔ 25:10</b> saldırıyor ve kalan süre, <b>📦</b> kutu topluyor.</li>
+  </ol>
+  <p>Uygulamanın ana ekranındaki <b>Ayarlar</b>'dan çalışma süresini, hızı (Normal / Hızlı) ve kutu toplamayı değiştirebilirsin.</p>
+</li>
+
+</ol>
+
+<!-- Tablet ve farkli ekranlar -->
+<section class="tablet" id="tablet">
+  <h2>Tablet ya da farklı telefon kullanıyorsan</h2>
+  <p><b>Bir şey yapmana gerek yok.</b> ▶'a bastığında uygulama önce oyun ekranını tanır: sol üstteki aslanlı çerçeveden ekranının boyutunu bulur, HP/MP barını, mobun can barını, Open ve Collect All butonlarını ve tuşların yerini kendisi ayarlar.</p>
+  <ol class="alt">
+    <li>Karakterinle oyuna gir, ekranda sol üstteki aslanlı çerçeve görünsün.</li>
+    <li>▶'a bas. Panelde kısa bir süre <b>🔍</b> görünür, sonra <span class="ekran">Ekran tanındı ✓</span> yazar ve makro başlar.</li>
+  </ol>
+  <p>Ana ekrandaki <b>Ekranı otomatik tanı</b> anahtarı açık olmalı (varsayılan olarak açık).</p>
+
+  <h3>Sadece skill yerlerin farklıysa</h3>
+  <p>Kendi karakterinde skilleri farklı slotlara koyduysan, bir kere <b>⋯ → 🛠 Tuşları düzenle</b>'den ayarla:</p>
+  <ol class="alt">
+    <li>Soldaki çubuktan <span class="ekran">Hepsini sil</span> → <span class="ekran">Evet</span>.</li>
+    <li>Sırayla her tuşa dokun ve ne olduğunu seç:
+      <ul>
+        <li>Skill ikonları → <b>✨ Skill</b> → ne sıklıkla (<b>∞ Sürekli</b> ya da 1–60 sn)</li>
+        <li>Kırmızı iksir → <b>❤ HP pot</b></li>
+        <li>Mor/mavi iksir → <b>💧 MP pot</b></li>
+        <li>Yeşil yüzlü kırmızı hedef → <b>🎯 Mob seç</b></li>
+      </ul>
+    </li>
+    <li>Yanlış olursa yuvarlağa dokun: değiştir ya da sil. Bitince <span class="ekran">Bitti ✓</span>.</li>
+  </ol>
+  <p style="margin:0">HP/MP barı, hedef barı ve kutular bundan etkilenmez, onlar yine otomatik.</p>
+</section>
+
+<section>
+  <h2>Sorun çözme</h2>
+  <table class="sorun">
+    <tr><td>"Bu üyelik başka bir cihaza bağlı"</td><td>Telefon değiştirdiysen Muhammed'e yaz, cihaz bağlantını sıfırlasın. Sonra tekrar giriş yap.</td></tr>
+    <tr><td>"Üyelik süresi doldu"</td><td>Süre uzatması için Muhammed'e yaz.</td></tr>
+    <tr><td>"Kullanıcı adı veya şifre yanlış"</td><td>Büyük/küçük harfe ve boşluğa dikkat et. 10 hatalı denemeden sonra 10 dakika beklemen gerekir.</td></tr>
+    <tr><td>"Sunucuya ulaşılamadı"</td><td>İnternetini kontrol et. Mobil veri ya da Wi-Fi'ı kapatıp açmayı dene.</td></tr>
+    <tr><td>Panel ekranda yok</td><td>Telefon erişilebilirlik iznini kapatmış olabilir. 4. adımı tekrar yap, 5. adımdaki pil ayarlarını kontrol et.</td></tr>
+    <tr><td>Makro kendiliğinden durdu</td><td>Durduğunda ekranda sebebi yazar: <b>Süre bitti</b> (ayarlardan artır), <b>HP uzun süre düşük kaldı</b> (pot bitmiş olabilir), <b>Üyelik</b> (süre ya da internet).</td></tr>
+    <tr><td>Yanlış yerlere basıyor</td><td>Skill yerlerin farklıdır. Tablet bölümündeki <b>Tuşları düzenle</b> kısmını yap.</td></tr>
+    <tr><td>Panelde sürekli 🔍 duruyor</td><td>Oyun ekranı tanınamıyor. Karakterinle oyunda olduğundan ve sol üstteki aslanlı çerçevenin görünür olduğundan emin ol. Ekran paylaşımında <b>Tüm ekran</b> seçili olmalı.</td></tr>
+    <tr><td>Kutuları toplamıyor</td><td>Ana ekranda <b>Kutuları topla</b> ve <b>Ekranı otomatik tanı</b> açık mı bak. İkisi de açıksa envanterin dolu olabilir.</td></tr>
+    <tr><td>Pot basmıyor</td><td><b>⋯ → 🛠 Tuşları düzenle</b>'de HP pot ve MP pot etiketlerinin gerçekten iksirlerin üstünde olduğunu kontrol et.</td></tr>
+    <tr><td>Ekran izni penceresi hiç çıkmıyor</td><td>Uygulamaya bildirim izni ver, telefonu yeniden başlat ve tekrar dene.</td></tr>
+  </table>
+</section>
+
+<div class="uyari" style="margin-top:28px">
+  <b>Bilmen gereken:</b> Makro kullanmak oyunun kurallarına aykırıdır ve oyun hesabının kapatılmasına yol açabilir. Kullanıp kullanmamak senin kararın, risk de senin hesabın için geçerli.
+</div>
+
+<footer>
+  Projeindirpedal • Yapımcı: Muhammed Salman<br>
+  <a href="https://projeindir.com.tr">projeindir.com.tr</a>
+</footer>
+
+</main>
+</body>
+</html>

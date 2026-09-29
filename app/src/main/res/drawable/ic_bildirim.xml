@@ -1,0 +1,9 @@
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="24dp" android:height="24dp"
+    android:viewportWidth="108" android:viewportHeight="108">
+    <!-- Bildirim cubugu icin tek renkli P -->
+    <path android:fillColor="#FFFFFFFF" android:fillType="evenOdd"
+        android:pathData="M54,6a48,48 0,1 1,0 96a48,48 0,1 1,0 -96z M54,14a40,40 0,1 0,0 80a40,40 0,1 0,0 -80z"/>
+    <path android:fillColor="#FFFFFFFF" android:fillType="evenOdd"
+        android:pathData="M40,28 L58,28 A15,15 0 0 1 58,58 L50,58 L50,80 L40,80 Z M50,37 L50,49 L57,49 A6,6 0 0 0 57,37 Z"/>
+</vector>

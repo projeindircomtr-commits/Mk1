@@ -1,0 +1,50 @@
+plugins {
+    id 'com.android.application'
+    id 'org.jetbrains.kotlin.android'
+}
+
+android {
+    namespace 'com.kanka.makro'
+    compileSdk 34
+
+    defaultConfig {
+        applicationId "com.kanka.makro"
+        minSdk 26
+        targetSdk 34
+        // Her GitHub derlemesi otomatik yeni surum numarasi alir (panelde bu sayi kullanilir)
+        def derleme = (System.getenv("GITHUB_RUN_NUMBER") ?: "1").toInteger()
+        versionCode derleme
+        versionName "1." + derleme
+    }
+
+    // Sabit imza: yeni APK eskisinin ustune kurulur, ayarlar silinmez
+    signingConfigs {
+        sabit {
+            storeFile file('makro.keystore')
+            storePassword 'makro123'
+            keyAlias 'makro'
+            keyPassword 'makro123'
+        }
+    }
+
+    buildTypes {
+        debug { signingConfig signingConfigs.sabit }
+        release {
+            // Kodu karistir/kucult: APK'yi sokup lisansi atlatmayi zorlastirir
+            minifyEnabled true
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt')
+            signingConfig signingConfigs.sabit
+        }
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_17
+        targetCompatibility JavaVersion.VERSION_17
+    }
+    kotlinOptions { jvmTarget = '17' }
+
+    lint {
+        checkReleaseBuilds false
+        abortOnError false
+    }
+}
